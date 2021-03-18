@@ -5,6 +5,7 @@ const initialState = {
   posts: [],
   status: 'idle',
   error: null,
+  fetchingComment: false,
 }
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
@@ -81,11 +82,20 @@ const postsSlice = createSlice({
     [addNewPost.fulfilled]: (state, action) => {
       state.posts.push(action.payload)
     },
+    [addPostComment.pending]: (state) => {
+      state.fetchingComment = true
+    },
     [addPostComment.fulfilled]: (state, { payload }) => {
       const post = state.posts.find((post) => post.id === payload.post)
       post.comments.push(payload)
+      state.fetchingComment = false
+    },
+    [addCommentReply.pending]: (state) => {
+      state.fetchingComment = true
     },
     [addCommentReply.fulfilled]: (state, { payload }) => {
+      state.fetchingComment = false
+
       const post = state.posts.find((post) => post.id === payload.post)
       post.comments = post.comments.map((comment) => {
         if (comment.id === payload.comment) {

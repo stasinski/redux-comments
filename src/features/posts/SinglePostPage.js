@@ -6,7 +6,7 @@ import { PostAuthor } from './PostAuthor'
 import { TimeAgo } from './TimeAgo'
 import { ReactionButtons } from './ReactionButtons'
 import { selectPostById } from './postsSlice'
-import Comments from '../../Comments'
+import Comments from '../../comment'
 
 export const SinglePostPage = ({ match }) => {
   const { postId } = match.params
