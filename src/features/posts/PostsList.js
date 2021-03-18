@@ -6,6 +6,7 @@ import { PostAuthor } from './PostAuthor'
 import { TimeAgo } from './TimeAgo'
 import { ReactionButtons } from './ReactionButtons'
 import { selectAllPosts, fetchPosts } from './postsSlice'
+import CommentCount from './CommentCount'
 
 const PostExcerpt = ({ post }) => {
   return (
@@ -14,6 +15,7 @@ const PostExcerpt = ({ post }) => {
       <div>
         <PostAuthor userId={post.user} />
         <TimeAgo timestamp={post.date} />
+        <CommentCount count={post.comments.length} />
       </div>
       <p className="post-content">{post.content.substring(0, 100)}</p>
 
